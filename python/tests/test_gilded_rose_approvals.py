@@ -2,7 +2,8 @@ import io
 import sys
 
 from approvaltests import verify
-from texttest_fixture import main
+
+from .texttest_fixture import main
 
 
 def test_gilded_rose_approvals():
@@ -16,7 +17,7 @@ def test_gilded_rose_approvals():
     finally:
         sys.stdout = orig_sysout
 
-    verify(answer)
+    verify(answer,reporter=None)
 
 
 if __name__ == "__main__":

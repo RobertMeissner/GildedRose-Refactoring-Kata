@@ -18,4 +18,4 @@ test:
 	PYTHONPATH=. uv run pytest tests/ -v
 
 test-coverage:
-	PYTHONPATH=. uv run pytest tests/ --cov=. --cov-report=term-missing --cov-report=html:htmlcov --cov-fail-under=2
+	PYTHONPATH=. uv run pytest tests/ --cov=src --cov-report=term-missing --cov-report=html:htmlcov --cov-fail-under=2

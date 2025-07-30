@@ -42,3 +42,13 @@ Copying what is approved in approved_files folder solves both tests for now
 tests import fixture from root and execute the main function.
 
 coverage: 100% for gilded_rose.py - at least that is good. But: the test is inunderstandable.
+
+## Restructuring
+
+created src and moved files around
+- updated imports
+
+found: "from gilded_rose import *"
+- removed and replaced by explicit call
+
+approvaltests kind of flaky: a single new line caused it to fail

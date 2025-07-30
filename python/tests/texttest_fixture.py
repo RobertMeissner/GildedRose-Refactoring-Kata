@@ -1,4 +1,4 @@
-from gilded_rose import *
+from src.gilded_rose import GildedRose, Item
 
 
 def main():
