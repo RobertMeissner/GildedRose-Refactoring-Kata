@@ -75,3 +75,6 @@ update_quality checks value based, not type based, i.e., it decides depending on
 
 quality = quality(name, sell_in)
 - sell_in normally set BEFORE quality
+
+Have the idea something must be mutated or chained
+- e.g. all items are reduced in sell_in, depending on name a multiplier to the reduction of quality, quality floored
