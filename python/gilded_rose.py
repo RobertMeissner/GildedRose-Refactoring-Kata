@@ -1,7 +1,4 @@
-# -*- coding: utf-8 -*-
-
-class GildedRose(object):
-
+class GildedRose:
     def __init__(self, items):
         self.items = items
 
@@ -11,16 +8,15 @@ class GildedRose(object):
                 if item.quality > 0:
                     if item.name != "Sulfuras, Hand of Ragnaros":
                         item.quality = item.quality - 1
-            else:
-                if item.quality < 50:
-                    item.quality = item.quality + 1
-                    if item.name == "Backstage passes to a TAFKAL80ETC concert":
-                        if item.sell_in < 11:
-                            if item.quality < 50:
-                                item.quality = item.quality + 1
-                        if item.sell_in < 6:
-                            if item.quality < 50:
-                                item.quality = item.quality + 1
+            elif item.quality < 50:
+                item.quality = item.quality + 1
+                if item.name == "Backstage passes to a TAFKAL80ETC concert":
+                    if item.sell_in < 11:
+                        if item.quality < 50:
+                            item.quality = item.quality + 1
+                    if item.sell_in < 6:
+                        if item.quality < 50:
+                            item.quality = item.quality + 1
             if item.name != "Sulfuras, Hand of Ragnaros":
                 item.sell_in = item.sell_in - 1
             if item.sell_in < 0:
@@ -31,9 +27,8 @@ class GildedRose(object):
                                 item.quality = item.quality - 1
                     else:
                         item.quality = item.quality - item.quality
-                else:
-                    if item.quality < 50:
-                        item.quality = item.quality + 1
+                elif item.quality < 50:
+                    item.quality = item.quality + 1
 
 
 class Item:

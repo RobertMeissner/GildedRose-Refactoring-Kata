@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import print_function
-
 from gilded_rose import *
 
 
@@ -19,6 +16,7 @@ def main():
     ]
     days = 2
     import sys
+
     if len(sys.argv) > 1:
         days = int(sys.argv[1]) + 1
     for day in range(days):
@@ -26,7 +24,7 @@ def main():
         print("name, sellIn, quality")
         for item in items:
             print(item)
-        print("")
+        print()
         GildedRose(items).update_quality()
 
 

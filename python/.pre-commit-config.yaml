@@ -1,0 +1,146 @@
+default_language_version:
+  python: python3.12
+
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.9
+    hooks:
+      - id: ruff
+        files: ^python/
+        exclude: ^python/\.venv/
+        args:
+          - --line-length=140
+          - --fix
+          - --select=ALL
+          - --ignore=D100,D104,COM812,ISC001,T201,S101,D101,D107,D102
+          - --per-file-ignores=__init__.py:F401,tests/*:S101,tests/*:PLR0913,tests/*:PLR2004
+      - id: ruff-format
+        files: ^python/
+        exclude: ^python/\.venv/
+        args: [--line-length=140]
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.11.2
+    hooks:
+      - id: mypy
+        files: ^python/
+        exclude: ^python/\.venv/
+        verbose: true
+        # TODO: Make automatic
+        stages: [manual]
+        args: [--strict, --ignore-missing-imports, --show-error-codes]
+        additional_dependencies: [types-requests, types-PyYAML]
+
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.8.6
+    hooks:
+      - id: bandit
+        args: ["-ll"]
+        exclude: ^python
+        # TODO: Make include everything
+        files: ^backend/src/(domain|application|infrastructure)/.*\.py$
+
+  - repo: https://github.com/pypa/pip-audit
+    rev: v2.7.3
+    hooks:
+      - id: pip-audit
+
+  # Dead code detection (ruff F401, F841 help but vulture is more thorough)
+  - repo: https://github.com/jendrikseipp/vulture
+    rev: 'v2.11'
+    hooks:
+      - id: vulture
+        files: ^python/
+        exclude: ^python/\.venv/
+        args: ["python/gilded_rose.py", "python/tests/", "--min-confidence", "50"]
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-ast
+        files: ^python/
+        exclude: ^python/\.venv/
+      - id: check-merge-conflict
+        files: ^python/
+        exclude: ^python/\.venv/
+      - id: check-yaml
+        files: ^python/
+        exclude: ^python/\.venv/
+      - id: check-toml
+        files: ^python/
+        exclude: ^python/\.venv/
+      - id: check-json
+        files: ^python/
+        exclude: ^python/\.venv/
+      - id: end-of-file-fixer
+        files: ^python/
+        exclude: ^python/\.venv/
+      - id: trailing-whitespace
+        files: ^python/
+        exclude: ^python/\.venv/
+      - id: mixed-line-ending
+        files: ^python/
+        exclude: ^python/\.venv/
+      - id: check-added-large-files
+        files: ^python/
+        exclude: ^python/\.venv/
+        args: ['--maxkb=1000']
+      - id: debug-statements
+        files: ^python/
+        exclude: ^python/\.venv/
+
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+    hooks:
+      - id: detect-secrets
+        args: ['--baseline', '.secrets.baseline']
+        exclude: package.lock.json
+        # TODO: include
+        stages: [manual]
+
+  - repo: local
+    hooks:
+      - id: radon-cc
+        name: radon complexity check
+        entry: uv run radon cc
+        language: python
+        files: \.py$
+        exclude: \.venv/
+        args: [--min=B, --show-complexity]
+        additional_dependencies: [radon]
+
+      - id: radon-mi
+        name: radon maintainability index
+        entry: radon mi
+        language: python
+        files: \.py$
+        exclude: \.venv/
+        args: [--min=B, --show]
+        additional_dependencies: [radon]
+
+      - id: radon-raw
+        name: radon raw metrics
+        entry: radon raw
+        language: python
+        files: \.py$
+        exclude: \.venv/
+        args: [--summary]
+        additional_dependencies: [radon]
+
+      - id: pytest
+        name: pytest
+        entry: sh -c 'cd python && python -m pytest'
+        language: system
+        files: ^python/.*\.py$
+        exclude: ^python/\.venv/
+        pass_filenames: false
+        always_run: false
+
+      - id: coverage
+        name: coverage check
+        entry: sh -c 'cd python && python -m coverage run -m pytest && python -m coverage report --fail-under=80'
+        language: system
+        files: ^python/.*\.py$
+        exclude: ^python/\.venv/
+        pass_filenames: false
+        always_run: false
