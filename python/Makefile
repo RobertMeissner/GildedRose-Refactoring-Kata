@@ -13,3 +13,9 @@ metrics-detailed:
 
 pre-commit:
 	uv run pre-commit run -a
+
+test:
+	PYTHONPATH=. uv run pytest tests/ -v
+
+test-coverage:
+	PYTHONPATH=. uv run pytest tests/ --cov=. --cov-report=term-missing --cov-report=html:htmlcov --cov-fail-under=2

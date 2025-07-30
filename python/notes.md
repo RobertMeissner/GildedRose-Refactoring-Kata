@@ -21,3 +21,24 @@ Average complexity: A (4.3)
 
 Tests:
 - fail, of course
+
+
+## Reading task
+
+- Items property stays fixed. No change allowed
+- Quality changes depending on the item type, completely item related
+  - Delta Quality may depend on SellIn value
+- new item needs to be added
+- 0 <= Quality <= 50
+
+Mypy: 25 errors in all files
+
+- basically no typing
+- many string literals, no constants
+
+First time I see [approvaltests](https://pypi.org/project/approvaltests/)
+Copying what is approved in approved_files folder solves both tests for now
+
+tests import fixture from root and execute the main function.
+
+coverage: 100% for gilded_rose.py - at least that is good. But: the test is inunderstandable.
