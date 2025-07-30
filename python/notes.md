@@ -52,3 +52,26 @@ found: "from gilded_rose import *"
 - removed and replaced by explicit call
 
 approvaltests kind of flaky: a single new line caused it to fail
+
+How to go about?
+1. Extract constants for clarity
+2. Refactor too many if's in update_quality
+3. Update test function, mostly the fixture, that confuses a lot
+
+- Why this order?
+  - Tests run and cover the current function
+  - That includes the wicked ... ups*
+  - helps me find clarity for 3.
+
+*ups: noticed, the test itself is wrong, e.g., no handling for **Conjured** items -_-
+
+Approval test generates 2 newline - but ruff removes 1 -_-
+
+update_quality checks only what something is NOT, confuses, logic bizarre
+
+Refactoring shows double logic, confusing structure.
+update_quality checks value based, not type based, i.e., it decides depending on sell_in and quality, not depending on name, which == type/item class
+
+
+quality = quality(name, sell_in)
+- sell_in normally set BEFORE quality

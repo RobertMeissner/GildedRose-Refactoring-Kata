@@ -17,7 +17,7 @@ def test_gilded_rose_approvals():
     finally:
         sys.stdout = orig_sysout
 
-    verify(answer,reporter=None)
+    verify(answer, reporter=None)
 
 
 if __name__ == "__main__":
