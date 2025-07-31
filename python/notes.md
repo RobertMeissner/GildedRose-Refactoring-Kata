@@ -78,3 +78,12 @@ quality = quality(name, sell_in)
 
 Have the idea something must be mutated or chained
 - e.g. all items are reduced in sell_in, depending on name a multiplier to the reduction of quality, quality floored
+
+# 20250731
+
+Writing tests
+- using ItemManipulator as a wrapper/anti corruption class for Items, it turns out that tests directly access items in a global list. There is a lot of globals going on
+
+Average complexity: A (3.380952380952381)
+
+main.py has local import sys …
