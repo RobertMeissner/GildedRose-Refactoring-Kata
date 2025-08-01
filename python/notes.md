@@ -87,3 +87,7 @@ Writing tests
 Average complexity: A (3.380952380952381)
 
 main.py has local import sys …
+
+# 20250801
+
+Checked the internet for inspiration. Most focus ONLY on the if structure, have not found anyone discussing overall code quality, metrics, etc. It sounds like belly discussion, mostly. Why? can do better here!
